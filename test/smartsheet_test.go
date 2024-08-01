@@ -1,19 +1,22 @@
 package main
 
 import (
-	"log"
+	"os"
+	"strconv"
 	"testing"
+
+	"github.com/rs/zerolog/log"
 
 	"github.com/joho/godotenv"
 	"gitlab.allcomputergeek.net/libs/smartsheet-go"
 )
 
 func someFunction() {
-	log.Println("Loading .env file")
+	log.Info().Msg("Loading .env file")
 	err := godotenv.Load("../.env")
 	// handle error if needed
 	if err != nil {
-		log.Println("Error loading .env file")
+		log.Info().Msg("Error loading .env file")
 	}
 
 }
@@ -41,14 +44,30 @@ func TestNewClient(t *testing.T) {
 
 func TestGetSheet(t *testing.T) {
 	someFunction()
+	sheet_id, err := strconv.Atoi(os.Getenv("SHEET_ID"))
 	// Create a new SmartsheetClient
 	client := smartsheet.NewClient()
 
 	// Get a sheet by ID
-	sheet, err := client.GetSheet(1234567890)
+	sheet, err := client.GetSheet(sheet_id)
 	if err != nil {
 		t.Errorf("Error getting sheet: %v", err)
 	}
 
-	log.Printf("Sheet ID: %d\n", sheet.ID)
+	log.Info().Msgf("Ownder-ID: %d\n", sheet.OWNDER_ID)
+}
+
+func TestGetReport(t *testing.T) {
+	someFunction()
+	report_id, err := strconv.Atoi(os.Getenv("REPORT_ID"))
+	// Create a new SmartsheetClient
+	client := smartsheet.NewClient()
+
+	// Get a report by ID
+	report, err := client.GetReport(report_id)
+	if err != nil {
+		t.Errorf("Error getting report: %v", err)
+	}
+
+	log.Info().Msgf("Ownder-ID: %d\n", report.OWNDER_ID)
 }
