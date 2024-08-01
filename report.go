@@ -11,12 +11,12 @@ import (
 
 type Report struct {
 	ID          int          `json:"id"`
-	OWNDER_ID   int          `json:"ownerId"`
-	ATTACHMENTS []Attachment `json:"attachments"`
-	NAME        string       `json:"name"`
-	OWNER       string       `json:"owner"`
-	PERMALINK   string       `json:"permalink"`
-	ROWS        []Row        `json:"rows"`
+	OWNDER_ID   int          `json:"ownerId,omitempty"`
+	ATTACHMENTS []Attachment `json:"attachments,omitempty"`
+	NAME        string       `json:"name,omitempty"`
+	OWNER       string       `json:"owner,omitempty"`
+	PERMALINK   string       `json:"permalink,omitempty"`
+	ROWS        []Row        `json:"rows,omitempty"`
 }
 
 // GetSheet returns a report by ID

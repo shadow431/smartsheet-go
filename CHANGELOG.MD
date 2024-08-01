@@ -1,3 +1,8 @@
+# [0.0.3]
+FIX:
+- fixed Image id to string
+- fixed cell value to interface
+
 # [0.0.2]
 
 ADD:

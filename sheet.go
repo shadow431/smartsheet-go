@@ -12,7 +12,7 @@ import (
 // Sheet struct
 type Sheet struct {
 	ID        int `json:"id"`
-	OWNDER_ID int `json:"ownerId"`
+	OWNDER_ID int `json:"ownerId,omitempty"`
 }
 
 // GetSheet returns a sheet by ID
