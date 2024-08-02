@@ -17,6 +17,7 @@ type Report struct {
 	OWNER       string       `json:"owner,omitempty"`
 	PERMALINK   string       `json:"permalink,omitempty"`
 	ROWS        []Row        `json:"rows,omitempty"`
+	COLUMNS     []Column     `json:"columns,omitempty"`
 }
 
 // GetSheet returns a report by ID

@@ -1,3 +1,7 @@
+# [0.0.4]
+ADD:
+ - added COLUMNS to report struct
+
 # [0.0.3]
 FIX:
 - fixed Image id to string
