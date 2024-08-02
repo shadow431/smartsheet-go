@@ -55,6 +55,7 @@ func (c *SmartsheetClient) GetReport(reportID int) (Report, error) {
 	}
 
 	var report Report
+	log.Debug().Msgf("body: %s", body)
 	err = json.Unmarshal(body, &report)
 	if err != nil {
 		return Report{

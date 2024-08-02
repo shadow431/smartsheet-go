@@ -1,3 +1,8 @@
+# [0.0.5]
+ADD:
+ - Some logging to the GetReport function
+
+
 # [0.0.4]
 ADD:
  - added COLUMNS to report struct
