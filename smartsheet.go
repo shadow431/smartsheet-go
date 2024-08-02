@@ -2,7 +2,11 @@
 package smartsheet
 
 import (
+	"fmt"
+	"io/ioutil"
+	"net/http"
 	"os"
+	"strings"
 
 	"github.com/rs/zerolog/log"
 )
@@ -52,7 +56,7 @@ type OBJECT_VALUE struct {
 
 type Cell struct {
 	COLUMN_ID           int          `json:"columnId,omitempty"`
-	VirtualColumnID     int          `json:"virtualColumnId,omitempty"`
+	VIRTUAL_COLUMN_ID   int          `json:"virtualColumnId,omitempty"`
 	COLUMN_TYPE         string       `json:"columnType,omitempty"`
 	CONDITIONAL_FORMAT  string       `json:"conditionalFormat,omitempty"`
 	DISPLAY_VALUE       string       `json:"displayValue,omitempty"`
@@ -96,4 +100,56 @@ type Row struct {
 	EXPADED     bool         `json:"expanded,omitempty"`
 	ROW_NUMBER  int          `json:"rowNumber,omitempty"`
 	PERMALINK   string       `json:"permalink,omitempty"`
+}
+
+type User struct {
+	Email string `json:"email,omitempty"`
+	Name  string `json:"name,omitempty"`
+}
+
+func (c *SmartsheetClient) Call(url string, method string, data string) ([]byte, error) {
+	log.Info().Msgf("calling %s with method %s", url, method)
+	var req *http.Request
+	var err error
+	if data == "" {
+		log.Debug().Msg("no data provided")
+		req, err = http.NewRequest(method, url, nil)
+	} else {
+		log.Debug().Msgf("data: %s", data)
+		req, err = http.NewRequest(method, url, strings.NewReader(data))
+	}
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", c.AccessToken))
+	req.Header.Add("Content-Type", "application/json")
+
+	log.Info().Msgf("sending request %s", req)
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("error calling %s: %s", url, body)
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	return body, nil
+
+}
+
+func (c *SmartsheetClient) Get_Call(url string) ([]byte, error) {
+	log.Debug().Msg("Making Get Smartsheet Call")
+	body, err := c.Call(url, "GET", "")
+	if err != nil {
+		return nil, err
+	}
+
+	return body, nil
 }
