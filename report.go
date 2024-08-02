@@ -10,18 +10,18 @@ import (
 )
 
 type Report struct {
-	ID          int          `json:"id"`
-	OWNDER_ID   int          `json:"ownerId,omitempty"`
-	ATTACHMENTS []Attachment `json:"attachments,omitempty"`
-	NAME        string       `json:"name,omitempty"`
-	OWNER       string       `json:"owner,omitempty"`
-	PERMALINK   string       `json:"permalink,omitempty"`
-	ROWS        []Row        `json:"rows,omitempty"`
-	COLUMNS     []Column     `json:"columns,omitempty"`
+	ID          int             `json:"id"`
+	OWNDER_ID   int             `json:"ownerId,omitempty"`
+	ATTACHMENTS []Attachment    `json:"attachments,omitempty"`
+	NAME        string          `json:"name,omitempty"`
+	OWNER       string          `json:"owner,omitempty"`
+	PERMALINK   string          `json:"permalink,omitempty"`
+	ROWS        []Row           `json:"rows,omitempty"`
+	COLUMNS     []Report_Column `json:"columns,omitempty"`
 }
 
 type Report_Column struct {
-	ID    int    `json:"virtualId,omitempty"`
+	ID    int    `json:"virtualId"`
 	INDEX int    `json:"index,omitempty"`
 	TITLE string `json:"title,omitempty"`
 	TYPE  string `json:"type,omitempty"`
