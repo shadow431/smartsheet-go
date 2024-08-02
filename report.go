@@ -20,6 +20,13 @@ type Report struct {
 	COLUMNS     []Column     `json:"columns,omitempty"`
 }
 
+type Report_Column struct {
+	ID    int    `json:"virtualId,omitempty"`
+	INDEX int    `json:"index,omitempty"`
+	TITLE string `json:"title,omitempty"`
+	TYPE  string `json:"type,omitempty"`
+}
+
 // GetSheet returns a report by ID
 func (c *SmartsheetClient) GetReport(reportID int) (Report, error) {
 	log.Info().Msgf("getting report with ID: %d", reportID)

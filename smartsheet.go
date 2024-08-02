@@ -52,6 +52,7 @@ type OBJECT_VALUE struct {
 
 type Cell struct {
 	COLUMN_ID           int          `json:"columnId,omitempty"`
+	VirtualColumnID     int          `json:"virtualColumnId,omitempty"`
 	COLUMN_TYPE         string       `json:"columnType,omitempty"`
 	CONDITIONAL_FORMAT  string       `json:"conditionalFormat,omitempty"`
 	DISPLAY_VALUE       string       `json:"displayValue,omitempty"`

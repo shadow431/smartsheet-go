@@ -1,6 +1,8 @@
 # [0.0.5]
 ADD:
  - Some logging to the GetReport function
+ - added new report_column struct for the report struct
+ - added virtual_column_id to cell struct for reports
 
 
 # [0.0.4]
