@@ -1,3 +1,9 @@
+# [0.0.9]
+ADD:
+ - added new User and Comment structs
+ - added Call and Get_Call functions for httpd call re-use
+ - switch getReport to use Call and Get_Call functions
+
 # [0.0.8]
 ADD:
  - added new report_column struct for the report struct
