@@ -1,3 +1,7 @@
+# [0.0.11]
+ADDED:
+ - added smartsheet error handling
+
 # [0.0.10]
 Updated:
  - Moved some structs around to more aproprate files

@@ -165,6 +165,9 @@ func (c *SmartsheetClient) PostDiscussion(req *discussion_request, comment strin
 		return discussion, err
 	}
 	log.Debug().Msgf("Result: %s", smar_body.Result)
+	if smar_body.ErrorCode != 0 {
+		return discussion, fmt.Errorf("error creating discussion - %d: %s - %s", smar_body.ErrorCode, smar_body.RefId, smar_body.Message)
+	}
 
 	return smar_body.Result, nil
 }

@@ -31,6 +31,8 @@ type Smartsheet_Response struct {
 	Version    int    `json:"version,omitempty"`
 	Message    string `json:"message,omitempty"`
 	ResultCode int    `json:"resultCode,omitempty"`
+	ErrorCode  int    `json:"errorCode,omitempty"`
+	RefId      string `json:"refId,omitempty"`
 }
 
 // NewClient creates a new SmartsheetClient

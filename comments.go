@@ -80,7 +80,10 @@ func (c *SmartsheetClient) CreateComment(sheetId int, disccusion_id int, text st
 	if err != nil {
 		return comment, err
 	}
-
+	if smar_body.ErrorCode != 0 {
+		return comment, fmt.Errorf("error creating comment - %d: %s - %s", smar_body.ErrorCode, smar_body.RefId, smar_body.Message)
+	}
+	//var discussion_id int
 	return smar_body.Result, nil
 }
 
