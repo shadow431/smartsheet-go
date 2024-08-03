@@ -19,6 +19,20 @@ type SmartsheetClient struct {
 	BaseURL string
 }
 
+/*
+//Opting for a string instead of a struct for now
+type Includes struct {
+	Attachments bool
+	Comments    bool
+}
+*/
+
+type Smartsheet_Response struct {
+	Version    int    `json:"version,omitempty"`
+	Message    string `json:"message,omitempty"`
+	ResultCode int    `json:"resultCode,omitempty"`
+}
+
 // NewClient creates a new SmartsheetClient
 func NewClient() *SmartsheetClient {
 	log.Info().Msg("creating new client")
