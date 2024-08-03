@@ -108,7 +108,7 @@ func (c *SmartsheetClient) CreatSheetDiscussion(sheetId int, comment string) (Di
 }
 
 func (c *SmartsheetClient) CreatRowDiscussion(sheetId int, rowId int, comment string) (Discussion, error) {
-	log.Info().Msg("getting discussions")
+	log.Info().Msg("createing Row discussion")
 	discussion_request := Discussions(Discussions_With_Sheet_Id(sheetId), Discussions_With_Row_Id(rowId))
 
 	return c.PostDiscussion(discussion_request, comment)
@@ -144,7 +144,7 @@ func (c *SmartsheetClient) getDiscussions(discussion *discussion_request) (discu
 }
 
 func (c *SmartsheetClient) PostDiscussion(req *discussion_request, comment string) (Discussion, error) {
-	log.Info().Msg("getting discussions")
+	log.Info().Msg("Posting discussion")
 	url := fmt.Sprintf("%s/sheets/%d", c.BaseURL, req.Sheet_Id)
 	if req.Row_Id != 0 {
 		url = fmt.Sprintf("%s/rows/%d", url, req.Row_Id)
