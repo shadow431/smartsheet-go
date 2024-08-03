@@ -71,3 +71,100 @@ func TestGetReport(t *testing.T) {
 
 	log.Info().Msgf("Ownder-ID: %d\n", report.OWNDER_ID)
 }
+
+func TestListSheetDiscussions(t *testing.T) {
+	someFunction()
+	sheet_id, err := strconv.Atoi(os.Getenv("SHEET_ID"))
+	// Create a new SmartsheetClient
+	client := smartsheet.NewClient()
+
+	// List sheet discussions
+	discussions, err := client.ListSheetDiscussions(sheet_id)
+	if err != nil {
+		t.Errorf("Error listing sheet discussions: %v", err)
+	}
+
+	log.Info().Msgf("Discussions: %v\n", discussions)
+}
+
+func TestListRowDiscussions(t *testing.T) {
+	someFunction()
+	sheet_id, err := strconv.Atoi(os.Getenv("SHEET_ID"))
+	row_id, err := strconv.Atoi(os.Getenv("ROW_ID"))
+	// Create a new SmartsheetClient
+	client := smartsheet.NewClient()
+
+	// List row discussions
+	discussions, err := client.ListRowDiscussions(sheet_id, row_id)
+	if err != nil {
+		t.Errorf("Error listing row discussions: %v", err)
+	}
+
+	log.Info().Msgf("Discussions: %v\n", discussions)
+}
+
+func TestListRowDiscussionsWithInclude(t *testing.T) {
+	someFunction()
+	sheet_id, err := strconv.Atoi(os.Getenv("SHEET_ID"))
+	row_id, err := strconv.Atoi(os.Getenv("ROW_ID"))
+	// Create a new SmartsheetClient
+	client := smartsheet.NewClient()
+
+	// List row discussions
+	discussions, err := client.ListRowDiscussions(sheet_id, row_id, "comments")
+	if err != nil {
+		t.Errorf("Error listing row discussions: %v", err)
+	}
+
+	log.Info().Msgf("Discussions: %v\n", discussions)
+}
+
+func TestGetComment(t *testing.T) {
+	someFunction()
+	sheet_id, err := strconv.Atoi(os.Getenv("SHEET_ID"))
+	comment_id, err := strconv.Atoi(os.Getenv("COMMENT_ID"))
+	// Create a new SmartsheetClient
+	client := smartsheet.NewClient()
+
+	// Get a comment by ID
+	comment, err := client.GetComment(sheet_id, comment_id)
+	if err != nil {
+		t.Errorf("Error getting comment: %v", err)
+	}
+
+	log.Info().Msgf("Comment: %v\n", comment)
+}
+
+func TestCreateRowDiscussion(t *testing.T) {
+	someFunction()
+	sheet_id, err := strconv.Atoi(os.Getenv("SHEET_ID"))
+	row_id, err := strconv.Atoi(os.Getenv("ROW_ID"))
+	comment := "This is a test Discussion"
+	// Create a new SmartsheetClient
+	client := smartsheet.NewClient()
+
+	// Create a discussion
+	discussions, err := client.CreatRowDiscussion(sheet_id, row_id, comment)
+	if err != nil {
+		t.Errorf("Error creating discussion: %v", err)
+	}
+
+	log.Info().Msgf("Discussions: %v\n", discussions)
+}
+
+func TestCreateComment(t *testing.T) {
+	someFunction()
+	sheet_id, err := strconv.Atoi(os.Getenv("SHEET_ID"))
+	discussion_id, err := strconv.Atoi(os.Getenv("DISCUSSION_ID"))
+	text := "This is a test Comment"
+	// Create a new SmartsheetClient
+	client := smartsheet.NewClient()
+
+	// Create a comment
+	comment, err := client.CreateComment(sheet_id, discussion_id, text)
+	if err != nil {
+		t.Errorf("Error creating comment: %v", err)
+	}
+
+	log.Info().Msgf("Comment: %v\n", comment)
+}

@@ -1,3 +1,16 @@
+# [0.0.10]
+Updated:
+ - Moved some structs around to more aproprate files
+ - Change data handling from strings to byte slices in root call function
+
+Added:
+ - discussion create and gets based on row or sheet
+ - comment create and gets
+ - smartsheet_request struct for smartsheet post/get requests
+ - inlcudes struct for calls that can optionally include other objects
+ - Post_Call function for httpd post calls
+ - additional tests for comments and discussions
+
 # [0.0.9]
 ADD:
  - added new User and Comment structs
