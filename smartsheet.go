@@ -2,11 +2,11 @@
 package smartsheet
 
 import (
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
-	"strings"
 
 	"github.com/rs/zerolog/log"
 )
@@ -51,7 +51,9 @@ func (c *SmartsheetClient) Call(url string, method string, data string) ([]byte,
 		req, err = http.NewRequest(method, url, nil)
 	} else {
 		log.Debug().Msgf("data: %s", data)
-		req, err = http.NewRequest(method, url, strings.NewReader(data))
+		jsonBody := []byte(data)
+		bodyReader := bytes.NewReader(jsonBody)
+		req, err = http.NewRequest(method, url, bodyReader)
 	}
 	if err != nil {
 		return nil, err
@@ -82,6 +84,16 @@ func (c *SmartsheetClient) Call(url string, method string, data string) ([]byte,
 func (c *SmartsheetClient) Get_Call(url string) ([]byte, error) {
 	log.Debug().Msg("Making Get Smartsheet Call")
 	body, err := c.Call(url, "GET", "")
+	if err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+func (c *SmartsheetClient) Post_Call(url string, data string) ([]byte, error) {
+	log.Debug().Msg("Making Get Smartsheet Call")
+	body, err := c.Call(url, "POST", data)
 	if err != nil {
 		return nil, err
 	}
