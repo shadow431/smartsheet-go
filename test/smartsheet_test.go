@@ -54,7 +54,7 @@ func TestGetSheet(t *testing.T) {
 		t.Errorf("Error getting sheet: %v", err)
 	}
 
-	log.Info().Msgf("Ownder-ID: %d\n", sheet.OWNDER_ID)
+	log.Info().Msgf("Columns: %v\n", sheet.Columns)
 }
 
 func TestGetReport(t *testing.T) {
@@ -167,4 +167,19 @@ func TestCreateComment(t *testing.T) {
 	}
 
 	log.Info().Msgf("Comment: %v\n", comment)
+}
+
+func TestGetColumns(t *testing.T) {
+	someFunction()
+	sheet_id, err := strconv.Atoi(os.Getenv("SHEET_ID"))
+	// Create a new SmartsheetClient
+	client := smartsheet.NewClient()
+
+	// Get columns
+	columns, err := client.GetColumns(sheet_id)
+	if err != nil {
+		t.Errorf("Error getting columns: %v", err)
+	}
+
+	t.Logf("Columns: %v\n", columns)
 }

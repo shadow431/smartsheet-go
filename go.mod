@@ -1,6 +1,6 @@
 module gitlab.allcomputergeek.net/libs/smartsheet-go
 
-go 1.17
+go 1.23
 
 require (
 	github.com/joho/godotenv v1.5.1

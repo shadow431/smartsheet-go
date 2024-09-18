@@ -70,7 +70,7 @@ func (c *SmartsheetClient) Call(url string, method string, data string) ([]byte,
 		return nil, err
 	}
 	defer resp.Body.Close()
-
+	log.Info().Msgf("response: %s", resp)
 	body, err := ioutil.ReadAll(resp.Body)
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("error calling %s: %s", url, body)
@@ -94,8 +94,18 @@ func (c *SmartsheetClient) Get_Call(url string) ([]byte, error) {
 }
 
 func (c *SmartsheetClient) Post_Call(url string, data string) ([]byte, error) {
-	log.Debug().Msg("Making Get Smartsheet Call")
+	log.Debug().Msg("Making POst Smartsheet Call")
 	body, err := c.Call(url, "POST", data)
+	if err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+func (c *SmartsheetClient) Put_Call(url string, data string) ([]byte, error) {
+	log.Debug().Msg("Making Put Smartsheet Call")
+	body, err := c.Call(url, "PUT", data)
 	if err != nil {
 		return nil, err
 	}

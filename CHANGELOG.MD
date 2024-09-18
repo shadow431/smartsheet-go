@@ -1,3 +1,20 @@
+# [0.0.12]
+ADDED:
+ - etColumns to return all columns in a sheet
+ - pdateColumn to update a column in a sheet
+ - column_resonse, and column_get structs
+ - webhook callback and event structs
+ - Put_Call function for httpd put calls
+ - TestGetColumns test function
+
+UPDATED:
+ - column stuct to include more fields
+ - sheet struct to include more fields
+ - getSheet function to match the new request structure
+ - request logging
+ - rev GoLang from 1.17 -> 1.23
+ - GetSheet test to use columns not owner id
+
 # [0.0.11]
 ADDED:
  - added smartsheet error handling
