@@ -14,6 +14,7 @@ import (
 // SmartsheetClient struct
 type SmartsheetClient struct {
 	AccessToken string
+	ChangeAgent string
 
 	// BaseURL is the base URL for the Smartsheet API
 	BaseURL string
@@ -41,6 +42,7 @@ func NewClient() *SmartsheetClient {
 	return &SmartsheetClient{
 		AccessToken: os.Getenv("SMARTSHEET_ACCESS_TOKEN"),
 		BaseURL:     "https://api.smartsheet.com/2.0",
+		ChangeAgent: "",
 	}
 }
 
@@ -62,6 +64,9 @@ func (c *SmartsheetClient) Call(url string, method string, data string) ([]byte,
 	}
 	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", c.AccessToken))
 	req.Header.Add("Content-Type", "application/json")
+	if c.ChangeAgent != "" {
+		req.Header.Add("Smartsheet-Change-Agent", c.ChangeAgent)
+	}
 
 	log.Info().Msgf("sending request %s", req)
 	client := &http.Client{}
