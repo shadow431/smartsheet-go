@@ -1,3 +1,7 @@
+# [0.0.13]
+ADDED:
+ - client.ChangeAgent to allow for setting of the smartsheet-change-agent header
+
 # [0.0.12]
 ADDED:
  - etColumns to return all columns in a sheet
