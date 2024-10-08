@@ -1,3 +1,7 @@
+# [0.0.14]
+UPDATED
+ - GoLang Dependancy 1.23.1 -> 1.23.2
+
 # [0.0.13]
 ADDED:
  - client.ChangeAgent to allow for setting of the smartsheet-change-agent header
