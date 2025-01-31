@@ -13,6 +13,18 @@ type Column struct {
 	TITLE   string   `json:"title,omitempty"`
 	TYPE    string   `json:"type,omitempty"`
 	OPTIONS []string `json:"options,omitempty"`
+	PRIMARY bool     `json:"primary,omitempty"`
+}
+
+type column_request struct {
+	autoNumberFormat string
+	contactOptions   []string
+	primary          bool
+	symbol           string
+	ssytemColumnType string
+	title            string
+	TYPE             string
+	width            int
 }
 
 type column_response struct {
@@ -28,7 +40,7 @@ type column_get struct {
 	Columns     []Column `json:"data,omitempty"`
 }
 
-//Request Functions
+// Request Functions
 func (c *SmartsheetClient) GetColumns(sheetID int) ([]Column, error) {
 	log.Info().Msgf("getting sheet columns with sheet ID: %d", sheetID)
 	url := fmt.Sprintf("%s/sheets/%d/columns", c.BaseURL, sheetID)
@@ -44,7 +56,7 @@ func (c *SmartsheetClient) GetColumns(sheetID int) ([]Column, error) {
 	return column_get.Columns, nil
 }
 
-//update column
+// update column
 func (c *SmartsheetClient) UpdateColumn(sheetID int, columnID int, data string) (Column, error) {
 	log.Info().Msgf("updating column with sheet ID: %d and column ID: %d", sheetID, columnID)
 	url := fmt.Sprintf("%s/sheets/%d/columns/%d", c.BaseURL, sheetID, columnID)

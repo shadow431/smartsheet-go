@@ -1,3 +1,10 @@
+# [0.0.15]
+ADDED:
+ - createSheet
+ - CreateSheetInFolder
+ - CreateSheetInWorkspace
+ - CreateFolder #doesn't work yet
+
 # [0.0.14]
 UPDATED
  - GoLang Dependancy 1.23.1 -> 1.23.2
