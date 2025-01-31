@@ -183,3 +183,63 @@ func TestGetColumns(t *testing.T) {
 
 	t.Logf("Columns: %v\n", columns)
 }
+
+func TestCreateSheet(t *testing.T) {
+	someFunction()
+	// Create a new SmartsheetClient
+	client := smartsheet.NewClient()
+
+	// Create a sheet
+	sheet, err := client.CreateSheet("GOSDKTESTSHEET", []smartsheet.Column{
+		{
+			TITLE:   "GOSDKTESTSHEET",
+			TYPE:    "TEXT_NUMBER",
+			PRIMARY: true,
+		},
+	})
+	if err != nil {
+		t.Errorf("Error creating sheet: %v", err)
+	}
+
+	log.Info().Msgf("Sheet: %v\n", sheet)
+}
+func TestCreateSheetInFolder(t *testing.T) {
+	someFunction()
+	folder_id, err := strconv.Atoi(os.Getenv("FOLDER_ID"))
+	// Create a new SmartsheetClient
+	client := smartsheet.NewClient()
+
+	// Create a sheet in folder
+	sheet, err := client.CreateSheetInFolder("GOSDKTESTSHEET", []smartsheet.Column{
+		{
+			TITLE:   "GOSDKTESTSHEET",
+			TYPE:    "TEXT_NUMBER",
+			PRIMARY: true,
+		},
+	}, folder_id)
+	if err != nil {
+		t.Errorf("Error creating sheet in folder: %v", err)
+	}
+
+	log.Info().Msgf("Sheet: %v\n", sheet)
+}
+func TestCreateSheetInWorkspace(t *testing.T) {
+	someFunction()
+	workspace_id, err := strconv.Atoi(os.Getenv("WORKSPACE_ID"))
+	// Create a new SmartsheetClient
+	client := smartsheet.NewClient()
+
+	// Create a sheet in workspace
+	sheet, err := client.CreateSheetInWorkspace("Test Sheet", []smartsheet.Column{
+		{
+			TITLE:   "Name",
+			TYPE:    "TEXT_NUMBER",
+			PRIMARY: true,
+		},
+	}, workspace_id)
+	if err != nil {
+		t.Errorf("Error creating sheet in workspace: %v", err)
+	}
+
+	log.Info().Msgf("Sheet: %v\n", sheet)
+}

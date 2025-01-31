@@ -1,4 +1,4 @@
-//Client that will be used by other functions to interact with the Smartsheet API
+// Client that will be used by other functions to interact with the Smartsheet API
 package smartsheet
 
 import (
